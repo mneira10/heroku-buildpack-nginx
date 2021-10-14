@@ -6,11 +6,6 @@ mkfifo $psmgr
 
 # Evaluate config to get $PORT
 erb config/nginx.conf.erb > config/nginx.conf
-echo THE NGINX CONFIGURATION ------------------------------
-erb config/nginx.conf.erb
-erb config/nginx.conf.erb > NGINXCONF.conf
-erb config/nginx.conf.erb > ~/NGINXCONF.conf
-echo THE NGINX CONFIGURATION ------------------------------
 
 n=1
 while getopts :f option ${@:1:2}
@@ -24,6 +19,11 @@ done
 # Initialize log directory.
 mkdir -p logs/nginx
 touch logs/nginx/access.log logs/nginx/error.log
+echo THE NGINX CONFIGURATION ------------------------------
+erb config/nginx.conf.erb
+erb config/nginx.conf.erb > NGINXCONF.conf
+erb config/nginx.conf.erb > ~/NGINXCONF.conf
+echo THE NGINX CONFIGURATION ------------------------------
 echo 'buildpack=nginx at=logs-initialized'
 
 # Start log redirection.
